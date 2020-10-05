@@ -1,0 +1,64 @@
+#include <iostream>
+#include <fstream>
+#include <string>
+#include "Student.h"
+
+using namespace std;
+ifstream studentFile("students.txt", ios::in);
+string sLine;
+string sfname;
+string slname;
+bool Student::login(string username, string password)
+{
+  while(true)
+    {
+      string uname, pwd, buf = "";
+      int ibuf = 0;
+      studentFile >> uname >> pwd;
+      if(uname == username && pwd == password)
+	{
+	  studentFile >>sfname >> slname >> projectGrade >> quizGrade >> midtermGrade >> finalGrade;
+	  studentFile.clear();
+	  studentFile.seekg(0, studentFile.beg);
+	    return true;
+	} else if(studentFile.eof()){
+	studentFile.clear();
+	studentFile.seekg(0, studentFile.beg);
+	return false;
+      } else {
+	studentFile >>buf >>buf >> ibuf >> ibuf >> ibuf >> ibuf;
+      }
+    }
+}
+
+string Student::getStudentName(){
+   fullName = sfname + " " + slname;
+  return fullName;
+}
+
+int Student::getProjectGrade(){
+  return projectGrade;
+}
+
+int Student::getQuizGrade(){
+  return quizGrade;
+}
+
+int Student::getMidtermGrade(){
+  return midtermGrade;
+}
+
+int Student::getFinalGrade(){
+  return finalGrade;
+}
+
+double Student::getOverallGrade(){
+  double pg = 0.0, qg = 0.0, mg = 0.0 , fg= 0.0;
+  double overallGrade = 0.0;
+  pg = projectGrade * .3;
+  qg = quizGrade * .1;
+  mg = midtermGrade * .2;
+  fg = finalGrade * .4;
+  overallGrade = pg + qg + mg + fg;
+  return overallGrade; 
+}

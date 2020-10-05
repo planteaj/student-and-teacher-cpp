@@ -1,0 +1,25 @@
+Plante_assignment1/:
+total 244
+-rwxr-xr-x. 1 myid 41944 Jun 17 20:58 a.out
+-rw-r--r--. 1 myid  7318 Jun 17 20:55 Instructor.cpp
+-rw-r--r--. 1 myid  7318 Jun 17 20:54 Instructor.cpp~
+-rw-r--r--. 1 myid   407 Jun 17 01:03 Instructor.h
+-rw-r--r--. 1 myid   384 Jun 10 16:26 Instructor.h~
+-rw-r--r--. 1 myid 32376 Jun 17 20:55 Instructor.o
+-rw-r--r--. 1 myid    86 Jun 14 14:27 instructors.txt
+-rwxr-xr-x. 1 myid 41944 Jun 17 21:07 main
+-rw-r--r--. 1 myid  5517 Jun 17 20:58 main.cpp
+-rw-r--r--. 1 myid  5501 Jun 17 20:27 main.cpp~
+-rw-r--r--. 1 myid 28856 Jun 17 20:58 main.o
+-rw-r--r--. 1 myid   234 Jun 17 21:07 Makefile
+-rw-r--r--. 1 myid   235 Jun 17 21:14 Readme
+-rw-r--r--. 1 myid   213 Jun 17 21:12 Readme~
+-rw-r--r--. 1 myid     0 Jun 17 21:17 rec20130
+-rw-r--r--. 1 myid  1387 Jun 17 18:44 Student.cpp
+-rw-r--r--. 1 myid  1372 Jun 17 17:50 Student.cpp~
+-rw-r--r--. 1 myid     1 Jun 10 16:10 student.h~
+-rw-r--r--. 1 myid   418 Jun 17 00:59 Student.h
+-rw-r--r--. 1 myid   395 Jun 17 00:56 Student.h~
+-rw-r--r--. 1 myid 11384 Jun 17 20:18 Student.o
+-rw-r--r--. 1 myid   814 Jun 10 19:46 students.txt
+/home/myid/arp75723/Plante_assignment1/:/home/myid/csci-2720

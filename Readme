@@ -1,0 +1,13 @@
+Readme
+Andrew Plante, id:811959629
+email: arp75732uga.edu
+in order to compile each file, type:
+make Student.o
+make Instructor.o
+make main.o
+respectively.
+
+to link, type in:
+make main
+
+to run, type in ./main instructors.txt students.txt

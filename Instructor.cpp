@@ -1,0 +1,288 @@
+#include <iostream>
+#include <string>
+#include <fstream>
+#include "Student.h"
+#include "Instructor.h"
+
+using namespace std;
+
+ifstream inClientFile("instructors.txt", ios::in);
+ifstream sInClientFile("students.txt", ios::in);
+string line;
+string fname;
+string lname;
+bool Instructor::login(string username, string password) {
+  while(true)
+    {
+      string uname, pwd;
+      inClientFile >>uname >> pwd;
+      if(uname == username && pwd == password)
+	{
+	  inClientFile  >> fname >> lname;
+	  inClientFile.clear();
+	  inClientFile.seekg(0, inClientFile.beg);
+	  return true;
+	} else if(inClientFile.eof()) {
+	inClientFile.clear();
+	inClientFile.seekg(0, inClientFile.beg);
+	return false;
+      }
+    }
+  return false;
+}
+
+string Instructor::getInstructorName() {
+  fullName = fname + lname;
+  return fullName;
+}
+
+Student Instructor::getStudent(string username){
+  Student temp;
+  while(true){
+    string uname, pwd, buf;
+    int ibuf;
+    sInClientFile >> uname >> pwd >>buf >>buf >>ibuf >> ibuf >> ibuf >>ibuf;
+    if(uname == username){
+      temp.login(uname,pwd);
+      sInClientFile.clear();
+      sInClientFile.seekg(0, sInClientFile.beg);
+      return temp; 
+    } else if(sInClientFile.eof()){
+      sInClientFile.clear();
+      sInClientFile.seekg(0, sInClientFile.beg);
+      return temp;
+    }
+  }
+  return temp;
+}
+
+Student Instructor::getMinStudent(int gradeType){
+  Student temp;
+  string buf = "", uname = "", pwd = "", fName = "", fPwd = "";
+  int pg = 0,ibuf = 0,mg = 100;
+  double dg = 0.0;
+  if(gradeType == 1){
+    while(true){
+      sInClientFile >>uname >>pwd >>buf >> buf >> pg >> ibuf >> ibuf >> ibuf;
+      if(mg > pg){
+	mg = pg;
+	fName = uname;
+	fPwd = pwd;
+      } else if(sInClientFile.eof()){
+	sInClientFile.clear();
+	sInClientFile.seekg(0, sInClientFile.beg);
+	temp.login(fName, fPwd);
+	return temp;
+      }
+    }
+    return temp;
+  }else if(gradeType == 2){
+    while(true){
+      sInClientFile >>uname >>pwd >>buf >> buf >>ibuf>>pg >> ibuf >> ibuf;
+      if(mg > pg){
+	mg = pg;
+	fName = uname;
+	fPwd = pwd;
+      } else if(sInClientFile.eof()){
+	sInClientFile.clear();
+	sInClientFile.seekg(0, sInClientFile.beg);
+	temp.login(fName, fPwd);
+	return temp;
+      }
+    }
+  }else if(gradeType == 3){
+    while(true){
+      sInClientFile >>uname >>pwd >>buf >> buf >>ibuf >> ibuf>> pg >> ibuf;
+      if(mg > pg){
+	mg = pg;
+	fName = uname;
+	fPwd = pwd;
+      } else if(sInClientFile.eof()){
+	sInClientFile.clear();
+	sInClientFile.seekg(0, sInClientFile.beg);
+	temp.login(fName, fPwd);
+	return temp;
+      }
+    }
+  }else if(gradeType == 4){
+    while(true){
+      sInClientFile >>uname >>pwd >>buf >> buf >>ibuf >>ibuf >> ibuf >> pg;
+      if(mg > pg){
+	mg = pg;
+	fName = uname;
+	fPwd = pwd;
+      } else if(sInClientFile.eof()){
+	sInClientFile.clear();
+	sInClientFile.seekg(0, sInClientFile.beg);
+	temp.login(fName, fPwd);
+	return temp;
+      }
+    }
+  }else if(gradeType == 5){
+    while(true){
+      sInClientFile >>uname >>pwd >>buf >> buf >>ibuf >>ibuf >>ibuf >>ibuf;
+      Student otemp;
+      otemp.login(uname, pwd);
+      dg = otemp.getOverallGrade();
+      if(mg > dg){
+	mg = dg;
+	fName = uname;
+	fPwd = pwd;
+      }else if(sInClientFile.eof()){
+	sInClientFile.clear();
+	sInClientFile.seekg(0, sInClientFile.beg);
+	temp.login(fName, fPwd);
+	return temp;
+      }
+    }
+  }
+}
+
+Student Instructor::getMaxStudent(int gradeType){
+  Student temp;
+  string buf, uname, pwd;
+  int pg = 0,ibuf = 0,mg = 0;
+  double dg = 0.0;
+  if(gradeType == 1){
+    while(true){
+      sInClientFile >>uname >>pwd >>buf >> buf >> pg >> ibuf >> ibuf >> ibuf;
+      if(mg < pg){
+	mg = pg;
+	temp.login(uname, pwd);
+      } else if(sInClientFile.eof()){
+	sInClientFile.clear();
+	sInClientFile.seekg(0, sInClientFile.beg);
+	return temp;
+      }
+    }
+  }else if(gradeType == 2){
+    while(true){
+      sInClientFile >>uname >>pwd >>buf >> buf >>ibuf>>pg >> ibuf >> ibuf;
+      if(mg < pg){
+	mg = pg;
+	temp.login(uname, pwd);
+      } else if(sInClientFile.eof()){
+	sInClientFile.clear();
+	sInClientFile.seekg(0, sInClientFile.beg);
+	return temp;
+      }
+    }
+  }else if(gradeType == 3){
+    while(true){
+      sInClientFile >>uname >>pwd >>buf >> buf >>ibuf >> ibuf>> pg >> ibuf;
+      if(mg < pg){
+	mg = pg;
+	temp.login(uname, pwd);
+      } else if(sInClientFile.eof()){
+	sInClientFile.clear();
+	sInClientFile.seekg(0, sInClientFile.beg);
+	return temp;
+      }
+    }
+  }else if(gradeType == 4){
+    while(true){
+      sInClientFile >>uname >>pwd >>buf >> buf >>ibuf >>ibuf >> ibuf >> pg;
+      if(mg < pg){
+	mg = pg;
+	temp.login(uname, pwd);
+      } else if(sInClientFile.eof()){
+	sInClientFile.clear();
+	sInClientFile.seekg(0, sInClientFile.beg);
+	return temp;
+      }
+    }
+  }else if(gradeType == 5){
+    while(true){
+      sInClientFile >>uname >>pwd >>buf >> buf >>ibuf >>ibuf >>ibuf >>pg;
+      Student otemp;
+      otemp.login(uname, pwd);
+      dg = otemp.getOverallGrade();
+      if(mg < dg){
+	mg = dg;
+	temp.login(uname, pwd);
+      } else if(sInClientFile.eof()){
+	sInClientFile.clear();
+	sInClientFile.seekg(0, sInClientFile.beg);
+	return temp;
+      }
+    }
+  }
+}
+double Instructor::getAvg(int gradeType){
+  double sum = 0.0;
+  double avg = 0.0;
+  int pAmount = 0, ibuf = 0;
+  string uName = "", pwd = "", buf = "";
+  if(gradeType = 1){
+    while(true){
+      sInClientFile >>uName >> pwd >>buf >> buf >>ibuf >> ibuf >> ibuf >> ibuf;
+      Student bTemp;
+      bTemp.login(uName, pwd);
+      sum = sum + bTemp.getProjectGrade();
+      pAmount += 1;
+      if(sInClientFile.eof()){
+	avg = sum/pAmount;
+	sInClientFile.clear();
+	sInClientFile.seekg(0, sInClientFile.beg);
+	return avg;
+      } //if(sInClientFIle
+    } //while(true
+  } else if(gradeType = 2){
+    while(true){
+      sInClientFile >>uName >> pwd >> buf >> buf >> ibuf >> ibuf >> ibuf >> ibuf;
+      Student bTemp;
+      bTemp.login(uName, pwd);
+      sum += bTemp.getQuizGrade();
+      pAmount += 1;
+      if(sInClientFile.eof()){
+	avg = sum/pAmount;
+	sInClientFile.clear();
+	sInClientFile.seekg(0, sInClientFile.beg);
+	return avg;
+      } //if(gradeType
+    } //while(true
+  } else if(gradeType = 3){
+    while(true){
+      sInClientFile >>uName >> pwd >> buf >> buf >> ibuf >> ibuf >> ibuf >> ibuf;
+      Student bTemp;
+      bTemp.login(uName, pwd);
+      sum += bTemp.getMidtermGrade();
+      pAmount += 1;
+      if(sInClientFile.eof()){
+	sInClientFile.clear();
+	sInClientFile.seekg(0, sInClientFile.beg);
+	avg = sum/pAmount;
+	return avg;
+      } //if(sInClientFile
+    } //while(true
+  } else if(gradeType = 4){
+    while(true){
+      sInClientFile >>uName >> pwd >> buf >> buf >> ibuf >> ibuf >> ibuf >> ibuf;
+      Student bTemp;
+      bTemp.login(uName, pwd);
+      sum += bTemp.getFinalGrade();
+      pAmount += 1;
+      if(sInClientFile.eof()){
+	avg = sum/pAmount;
+	sInClientFile.clear();
+	sInClientFile.seekg(0, sInClientFile.beg);
+	return avg;
+      } //if(sInClientFile
+    } //while(true
+  } else if(gradeType = 5){
+    while(true){
+      sInClientFile >>uName >> pwd >> buf >> buf >> ibuf >> ibuf >> ibuf >> ibuf;
+      Student bTemp;
+      bTemp.login(uName, pwd);
+      sum += bTemp.getOverallGrade();
+      pAmount += 1;
+      if(sInClientFile.eof()){
+	sInClientFile.clear();
+	sInClientFile.seekg(0, sInClientFile.beg);
+	avg = sum/pAmount;
+	return avg;
+      } //if(sInClientFile
+    } //while(true
+  } //if(gradeType
+}
+
